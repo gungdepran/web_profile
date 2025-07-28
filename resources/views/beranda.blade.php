@@ -10,19 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
+        
+        html { scroll-behavior: smooth; }
         body { font-family: 'Playfair Display', serif; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="bg-white bg-opacity-80 shadow-sm sticky top-0 z-50 backdrop-blur fade-in">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center">
-                    <img src="{{ asset('gambar/logo.png') }}" alt="Logo Majelis Desa Adat" class="w-20 h-20 rounded-[92px] shadow-[0px_0px_24px_0px_rgba(0,0,0,0.25)] border border-black mr-3">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex-shrink-0 flex items-center group transition-transform duration-300 ease-in-out hover:scale-105">
+                    <img src="{{ asset('gambar/logo.png') }}" alt="Logo Majelis Desa Adat" class="w-20 h-20 rounded-[92px] shadow-[0px_0px_24px_0px_rgba(0,0,0,0.25)] border border-black mr-3 transition-transform duration-300 ease-in-out group-hover:scale-110">
                     <div class="flex flex-col">
-                        <a href="{{ route('beranda') }}" class="text-2xl font-bold text-black">Majelis Desa Adat</a>
-                        <a href="{{ route('beranda') }}" class="text-2xl font-bold text-black">Provinsi Bali</a>
+                        <a href="{{ route('beranda') }}" class="text-2xl font-bold text-black transition-transform duration-300 ease-in-out group-hover:scale-105">Majelis Desa Adat</a>
+                        <a href="{{ route('beranda') }}" class="text-2xl font-bold text-black transition-transform duration-300 ease-in-out group-hover:scale-105">Provinsi Bali</a>
                     </div>
                 </div>
                 <div class="hidden md:flex md:space-x-12">
@@ -41,15 +43,16 @@
     <header class="relative">
         <div class="absolute inset-0">
             <img src="{{ asset('gambar/background.png') }}" class="w-full h-[714.91px] object-cover" alt="Hero Background">
-            <div class="absolute inset-0 bg-black opacity-50 w-full h-[714.91px]"></div>
+            <div class="absolute inset-0 bg-black opacity-50 w-full h-[714.91px]">
+            </div>
         </div>
       <div class="relative h-[714.91px] flex items-center justify-center text-center text-white">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight">Majelis Desa Adat</h1>
-    <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight">Provinsi Bali</h1>
-    <p class="mt-12 max-w-3xl mx-auto text-xl md:text-2xl text-gray-200 tracking-wider">Nangun Sat Kerti Loka Bali</p>
-    <p class="mt-6 max-w-3xl mx-auto text-xl md:text-2xl text-gray-200 tracking-wider">Melalui Pembangunan Semesta Menuju Bali Era Baru</p>
-  </div>
+  <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight fade-in-up">Majelis Desa Adat</h1>
+  <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight fade-in-up" style="animation-delay: 0.2s">Provinsi Bali</h1>
+  <p class="mt-12 max-w-3xl mx-auto text-xl md:text-2xl text-gray-200 tracking-wider fade-in-up" style="animation-delay: 0.4s">Nangun Sat Kerti Loka Bali</p>
+  <p class="mt-6 max-w-3xl mx-auto text-xl md:text-2xl text-gray-200 tracking-wider fade-in-up" style="animation-delay: 0.6s">Melalui Pembangunan Semesta Menuju Bali Era Baru</p>
+</div>
 </div>
     </header>
     <main id="artikel" class="py-16 sm:py-24">
@@ -58,11 +61,12 @@
                 <h2 class="text-3xl font-bold text-gray-900 tracking-tight sm:text-4xl">Berita Terbaru</h2>
                 <img src="{{ asset('gambar/divider.png') }}" alt="Divider" class="mx-auto mt-4 h-8">
             </div>
+            
 
             @if($blogs->count())
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="flex overflow-x-auto gap-6 snap-x snap-mandatory px-4 -mx-5">
                     @foreach($blogs as $blog)
-                    <div class="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <div class="flex-none w-80 sm:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 snap-start">
                         <div class="flex-shrink-0">
                             <img class="h-48 w-full object-cover" 
                                  src="{{ $blog->gambar ? asset('storage/' . $blog->gambar) : 'https://placehold.co/600x400/e2e8f0/4a5568?text=Artikel' }}" 
