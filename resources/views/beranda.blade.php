@@ -3,38 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beranda - Website Anda</title>
-    
-    {{-- CDN untuk Tailwind CSS --}}
+    <title>Majelis Desa Adat Bali</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    {{-- CDN untuk Google Fonts (Inter) --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Playfair Display', serif; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0">
-                    <a href="{{ route('beranda') }}" class="text-2xl font-bold text-indigo-600">WebsiteKu</a>
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="{{ asset('gambar/logo.png') }}" alt="Logo Majelis Desa Adat" class="w-20 h-20 rounded-[92px] shadow-[0px_0px_24px_0px_rgba(0,0,0,0.25)] border border-black mr-3">
+                    <div class="flex flex-col">
+                        <a href="{{ route('beranda') }}" class="text-2xl font-bold text-black">Majelis Desa Adat</a>
+                        <a href="{{ route('beranda') }}" class="text-2xl font-bold text-black">Provinsi Bali</a>
+                    </div>
                 </div>
-                <div class="hidden md:flex md:space-x-8">
-                    <a href="#" class="text-gray-500 hover:text-indigo-600 font-medium">Beranda</a>
-                    <a href="#artikel" class="text-gray-500 hover:text-indigo-600 font-medium">Artikel</a>
-                    <a href="#" class="text-gray-500 hover:text-indigo-600 font-medium">Tentang Kami</a>
-                    <a href="#" class="text-gray-500 hover:text-indigo-600 font-medium">Kontak</a>
-                </div>
-                <div>
-                    <a href="{{ url('/login') }}" class="inline-block px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700">
-                        Login
-                    </a>
+                <div class="hidden md:flex md:space-x-12">
+                    <a href="#" class="text-gray-500 hover:text-indigo-600 font-medium text-lg">Berita</a>
+                     <img src="{{ asset('gambar/stright-line.svg') }}" alt="Divider" class="mx-2 h-7">
+                    <a href="#artikel" class="text-gray-500 hover:text-indigo-600 font-medium text-lg">Video</a>
+                     <img src="{{ asset('gambar/stright-line.svg') }}" alt="Divider" class="mx-2 h-7">
+                    <a href="#lokasi" class="text-gray-500 hover:text-indigo-600 font-medium text-lg">Lokasi</a>
+                     <img src="{{ asset('gambar/stright-line.svg') }}" alt="Divider" class="mx-2 h-7">
+                    <a href="regulasi.blade.php" class="text-gray-500 hover:text-indigo-600 font-medium text-lg">Regulasi</a>
                 </div>
             </div>
         </div>
@@ -42,26 +40,23 @@
 
     <header class="relative">
         <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1522252234503-e356532cafd5?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Hero Background">
-            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <img src="{{ asset('gambar/background.png') }}" class="w-full h-[714.91px] object-cover" alt="Hero Background">
+            <div class="absolute inset-0 bg-black opacity-50 w-full h-[714.91px]"></div>
         </div>
-        <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center text-white">
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">Wawasan Baru Setiap Hari</h1>
-            <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-200">Temukan koleksi artikel, berita, dan tutorial terkini yang kami siapkan khusus untuk Anda.</p>
-            <div class="mt-8">
-                <a href="#artikel" class="inline-block px-8 py-3 bg-indigo-600 text-white text-base font-semibold rounded-lg shadow-lg hover:bg-indigo-700 transform hover:-translate-y-1 transition-all">
-                    Mulai Membaca
-                </a>
-            </div>
-        </div>
+      <div class="relative h-[714.91px] flex items-center justify-center text-center text-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight">Majelis Desa Adat</h1>
+    <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight">Provinsi Bali</h1>
+    <p class="mt-12 max-w-3xl mx-auto text-xl md:text-2xl text-gray-200 tracking-wider">Nangun Sat Kerti Loka Bali</p>
+    <p class="mt-6 max-w-3xl mx-auto text-xl md:text-2xl text-gray-200 tracking-wider">Melalui Pembangunan Semesta Menuju Bali Era Baru</p>
+  </div>
+</div>
     </header>
-    
-
     <main id="artikel" class="py-16 sm:py-24">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 tracking-tight sm:text-4xl">Artikel Terbaru</h2>
-                <p class="mt-2 max-w-2xl mx-auto text-lg text-gray-600">Kumpulan tulisan terbaru dari para penulis kami.</p>
+                <h2 class="text-3xl font-bold text-gray-900 tracking-tight sm:text-4xl">Berita Terbaru</h2>
+                <img src="{{ asset('gambar/divider.png') }}" alt="Divider" class="mx-auto mt-4 h-8">
             </div>
 
             @if($blogs->count())
@@ -103,7 +98,7 @@
             @endif
         </div>
     </main>
-
+<!-- footer -->
     <footer class="bg-gray-800 text-gray-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
