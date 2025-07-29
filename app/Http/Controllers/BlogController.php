@@ -15,14 +15,14 @@ class BlogController extends Controller
         $blogs = Blog::paginate(10); 
 
         // Mengirim data ke view 'admin'
-        return view('admin', ['blogs' => $blogs]);
+        return view('admin.blog.admin', ['blogs' => $blogs]);
     }
 
     // Menampilkan form input
     public function create()
     {
         // Ubah 'blog.create' menjadi 'add'
-        return view('add'); 
+        return view('admin.blog.add'); 
     }
 
     // Menyimpan data ke database
@@ -43,12 +43,12 @@ class BlogController extends Controller
         Blog::create($data);
 
         // Arahkan ke halaman /admin setelah berhasil
-        return redirect('/admin')->with('success', 'Data berhasil disimpan!');
+        return redirect()->route('admin.blogs.index')->with('success', 'Data berhasil disimpan!');
     }
 
     public function edit(Blog $blog)
     {
-        return view('edit', compact('blog'));
+        return view('admin.blog.edit', compact('blog'));
     }
 
     /**
@@ -75,7 +75,7 @@ class BlogController extends Controller
 
         $blog->update($data);
 
-        return redirect()->route('admin.index')->with('success', 'Postingan berhasil diperbarui!');
+        return redirect()->route('admin.blogs.index')->with('success', 'Postingan berhasil diperbarui!');
     }
 
     /**
@@ -91,6 +91,6 @@ class BlogController extends Controller
         // Hapus data dari database
         $blog->delete();
 
-        return redirect()->route('admin.index')->with('success', 'Postingan berhasil dihapus!');
+        return redirect()->route('admin.blogs.index')->with('success', 'Postingan berhasil dihapus!');
     }
 }

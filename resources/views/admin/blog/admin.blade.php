@@ -25,7 +25,7 @@
         <h1 class="text-3xl font-bold text-gray-700">Manajemen Blog</h1>
         
         <div class="flex items-center space-x-4">
-            <a href="{{ route('admin.add') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all">
+            <a href="{{ route('admin.blogs.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                 Tambah Postingan
             </a>
@@ -82,9 +82,9 @@
                         </td>
                         <td class="px-5 py-4 whitespace-nowrap text-sm font-medium">
                             <div class="flex items-center space-x-3">
-                                <a href="{{ route('admin.edit', $blog->id) }}" class="px-4 py-2 bg-gray-200 text-gray-800 text-xs font-semibold rounded-lg hover:bg-gray-300 transition-colors">Edit</a>
+                                <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="px-4 py-2 bg-gray-200 text-gray-800 text-xs font-semibold rounded-lg hover:bg-gray-300 transition-colors">Edit</a>
                                 
-                                <form action="{{ route('admin.destroy', $blog->id) }}" method="POST" class="form-delete">
+                                <form action="{{ route('admin.blogs.destroy', $blog->id) }}" method="POST" class="form-delete">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="px-4 py-2 bg-red-600 text-white text-xs font-semibold rounded-lg hover:bg-red-700 transition-colors">Hapus</button>
@@ -115,7 +115,7 @@
 <script>
     Swal.fire({
         title: 'Sukses!',
-        text: '{{ session('success') }}',
+        text: "{{ session('success') }}",
         icon: 'success',
         confirmButtonColor: '#4f46e5',
         confirmButtonText: 'Mantap!'

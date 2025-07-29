@@ -18,7 +18,7 @@
 
         <div class="bg-white p-8 rounded-lg shadow-md">
             {{-- Form akan mengarah ke route 'admin.update' dengan method PUT --}}
-            <form action="{{ route('admin.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="flex items-center justify-end space-x-4">
-                    <a href="{{ route('admin.index') }}" class="px-4 py-2 bg-gray-200 text-gray-800 text-sm font-semibold rounded-lg hover:bg-gray-300 transition-colors">Batal</a>
+                    <a href="{{ route('admin.blogs.index') }}" class="px-4 py-2 bg-gray-200 text-gray-800 text-sm font-semibold rounded-lg hover:bg-gray-300 transition-colors">Batal</a>
                     <button type="submit" class="px-6 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 transition-colors">Update</button>
                 </div>
             </form>
