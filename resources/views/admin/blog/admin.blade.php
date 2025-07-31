@@ -3,113 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin - Manajemen Blog</title>
     
-    {{-- CDN untuk Tailwind CSS --}}
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- CDN untuk Bootstrap CSS --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    {{-- CDN untuk Google Fonts (Inter) --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+    {{-- CDN untuk Bootstrap Icons --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+    body {
+        display: flex;
+        min-height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+        .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 260px;
+        height: 100vh;
+        background: linear-gradient(180deg, #1e3c72, #2a5298);
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem 1rem;
+        overflow-y: auto;
+        z-index: 999;
+    }
+
+    .sidebar .brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .sidebar .brand i {
+        font-size: 2rem;
+        margin-right: 10px;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.5rem;
+        color: #dcdcdc;
+        border-radius: 8px;
+        transition: background 0.2s, color 0.2s;
+        font-size: 1rem;
+    }
+
+    .nav-link i {
+        margin-right: 12px;
+        font-size: 1.2rem;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+    }
+
+    .logout {
+        margin-top: auto;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 1rem;
+    }
+
+    .content {
+        flex-grow: 1;
+        padding: 2rem;
+        background-color: #ffffff;
+        margin-left: 260px; /* offset sesuai lebar sidebar */
+        overflow-y: auto;
+    }
+
+    @media (max-width: 768px) {
+        .sidebar {
+            position: fixed;
+            z-index: 1000;
+            height: 100vh;
+            transform: translateX(-100%);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar-toggler {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1100;
+            background: #2a5298;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+        }
+    }
+</style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-700">Manajemen Blog</h1>
-        
-        <div class="flex items-center space-x-4">
-            <a href="{{ route('admin.blogs.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                Tambah Postingan
-            </a>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all">
-                    Logout
-                </button>
-            </form>
-        </div>
+<body>
+<button class="sidebar-toggler d-md-none" onclick="document.querySelector('.sidebar').classList.toggle('open')">
+    <i class="bi bi-list"></i>
+</button>
+{{-- Sidebar --}}
+<div class="sidebar">
+    <div class="brand">
+        <i class="bi bi-shield-lock-fill"></i>
+        <span>Admin Panel</span>
     </div>
+    <a href="/admin" class="nav-link {{ Request::is('admin/dashboard') ? 'active' : '' }}">
+        <i class="bi bi-speedometer2"></i> Dashboard
+    </a>
+    <a href="{{ url('/admin/blogs') }}" class="nav-link {{ Request::is('admin/blogs*') ? 'active' : '' }}">
+        <i class="bi bi-newspaper"></i> Manajemen Berita
+    </a>
+    <a href="{{ route('admin.videos.index') }}" class="nav-link {{ Request::is('admin/videos*') ? 'active' : '' }}">
+        <i class="bi bi-camera-video-fill"></i> Manajemen Video
+    </a>
+    <a href="{{ route('admin.pengumumans.index') }}" class="nav-link {{ Request::is('admin/pengumumans*') ? 'active' : '' }}">
+        <i class="bi bi-megaphone-fill"></i> Manajemen Pengumuman
+    </a>
+    <a href="{{ route('admin.regulasi.index') }}" class="nav-link {{ Request::is('admin/regulasi*') ? 'active' : '' }}">
+        <i class="bi bi-file-earmark-text-fill"></i> Manajemen Regulasi
+    </a>
+    <div class="logout">
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf </form>
+    </div>
+</div>
 
-    <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="min-w-full leading-normal">
-                <thead class="bg-gray-50 border-b-2 border-gray-200">
-                    <tr>
-                        <th scope="col" class="px-5 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-16">
-                            Nomor
-                        </th>
-                        <th scope="col" class="px-5 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Gambar
-                        </th>
-                        <th scope="col" class="px-5 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Judul
-                        </th>
-                        <th scope="col" class="px-5 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Deskripsi
-                        </th>
-                        <th scope="col" class="px-5 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Aksi
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($blogs as $blog)
-                    <tr class="border-b border-gray-200 hover:bg-gray-50">
-                        <td class="px-5 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {{ ($blogs->currentPage() - 1) * $blogs->perPage() + $loop->iteration }}
-                        </td>
-                        <td class="px-5 py-4 whitespace-nowrap">
-                            @if($blog->gambar)
-                                <img src="{{ asset('storage/' . $blog->gambar) }}" alt="{{ $blog->judul }}" class="w-20 h-12 object-cover rounded-md">
-                            @else
-                                <span class="text-xs text-gray-500">N/A</span>
-                            @endif
-                        </td>
-                        <td class="px-5 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-                            {{ $blog->judul }}
-                        </td>
-                        <td class="px-5 py-4 text-sm text-gray-600">
-                            {{ Str::limit($blog->deskripsi, 50) }}
-                        </td>
-                        <td class="px-5 py-4 whitespace-nowrap text-sm font-medium">
-                            <div class="flex items-center space-x-3">
-                                <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="px-4 py-2 bg-gray-200 text-gray-800 text-xs font-semibold rounded-lg hover:bg-gray-300 transition-colors">Edit</a>
-                                
-                                <form action="{{ route('admin.blogs.destroy', $blog->id) }}" method="POST" class="form-delete">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="px-4 py-2 bg-red-600 text-white text-xs font-semibold rounded-lg hover:bg-red-700 transition-colors">Hapus</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="5" class="text-center py-10 text-gray-500">
-                            <p class="text-lg">Belum ada postingan.</p>
-                        </td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="px-5 py-4 bg-white border-t">
-            {{ $blogs->links() }}
+
+{{-- Konten Utama --}}
+<div class="content">
+    <div class="container-fluid">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white">
+                <h1 class="h5 mb-0">Manajemen Blog</h1>
+            </div>
+            <div class="card-body">
+                <a href="{{ route('admin.blogs.create') }}" class="btn btn-success rounded-pill mb-4 px-3">
+                    <i class="bi bi-plus-circle-fill me-2"></i>Tambah Postingan Baru
+                </a>
+
+                @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th style="width: 50px;">No</th>
+                                <th>Judul</th>
+                                <th>Deskripsi</th>
+                                <th style="width: 120px;">Gambar</th>
+                                <th style="width: 160px;">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($blogs as $blog)
+                            <tr>
+                                <td>{{ ($blogs->currentPage() - 1) * $blogs->perPage() + $loop->iteration }}</td>
+                                <td>{{ $blog->judul }}</td>
+                                <td>{{ Str::limit($blog->deskripsi, 70) }}</td>
+                                <td>
+                                    <img src="{{ $blog->gambar ? asset('storage/' . $blog->gambar) : 'https://placehold.co/100x100/e2e8f0/4a5568?text=Gambar' }}" alt="{{ $blog->judul }}" class="img-thumbnail">
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="btn btn-sm btn-warning">
+                                            <i class="bi bi-pencil-square me-1"></i> Edit
+                                        </a>
+                                        <form action="{{ route('admin.blogs.destroy', $blog->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="bi bi-trash3-fill me-1"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-4">Belum ada postingan.</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+
+                {{-- Pagination --}}
+                <div class="d-flex justify-content-center mt-4">
+                    {{ $blogs->links() }}
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-{{-- Skrip untuk SweetAlert (Notifikasi Sukses) --}}
+{{-- CDN untuk Bootstrap JS --}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if(session('success'))
 <script>
@@ -122,10 +231,8 @@
     });
 </script>
 @endif
-
-{{-- Skrip untuk SweetAlert (Konfirmasi Hapus) --}}
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
     const deleteForms = document.querySelectorAll('.form-delete');
 
     deleteForms.forEach(form => {

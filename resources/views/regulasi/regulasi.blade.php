@@ -18,7 +18,7 @@
         body { font-family: 'Inter', sans-serif; }
         .font-serif { font-family: 'Playfair Display', serif; }
         .hero-bg {
-            background-image: url("{{ asset('gambar/background.png') }}"); /* Ganti dengan path gambar latar Anda */
+            background-image: url("{{ asset('gambar/background.png') }}"); 
             background-size: cover;
             background-position: center;
         }
@@ -39,52 +39,52 @@
         </div>
     </header>
 
-    {{-- MENU IKON REGULASI --}}
-    <section class="py-12 bg-white shadow-md">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                
-                {{-- Keputusan Paruman (Aktif) --}}
-                <a href="{{ route('regulasi.list') }}" class="group">
-                    <div class="w-24 h-24 mx-auto bg-indigo-600 rounded-full flex items-center justify-center text-white shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i class="bi bi-person-check-fill text-4xl"></i>
-                    </div>
-                    <h3 class="mt-4 text-lg font-semibold text-gray-800 font-serif">Keputusan Paruman</h3>
-                </a>
+{{-- MENU IKON REGULASI --}}
+<section class="py-12 bg-white shadow-md">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            
+            {{-- Keputusan Paruman --}}
+            <a href="{{ route('regulasi.list') }}" class="group">
+                <div class="w-24 h-24 mx-auto bg-indigo-600 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                    <img src="{{ asset('gambar/regulasi/pengumuman.svg') }}" alt="Keputusan Paruman" class="w-12 h-12">
+                </div>
+                <h3 class="mt-4 text-lg font-semibold text-gray-800 font-serif">Keputusan Paruman</h3>
+            </a>
 
-                {{-- Undang-Undang (Placeholder) --}}
-                <a href="#" class="group">
-                    <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full flex items-center justify-center text-gray-600 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i class="bi bi-journal-bookmark-fill text-4xl"></i>
-                    </div>
-                    <h3 class="mt-4 text-lg font-semibold text-gray-500 font-serif">Undang-Undang</h3>
-                </a>
+            {{-- Undang-Undang --}}
+            <a href="#" class="group">
+                <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                    <img src="{{ asset('gambar/regulasi/palu.svg') }}" alt="Undang-Undang" class="w-12 h-12">
+                </div>
+                <h3 class="mt-4 text-lg font-semibold text-gray-500 font-serif">Undang-Undang</h3>
+            </a>
 
-                {{-- Hukum Adat (Placeholder) --}}
-                <a href="#" class="group">
-                    <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full flex items-center justify-center text-gray-600 shadow-lg transform group-hover:scale-110 transition-transform">
-                         <i class="bi bi-bank2 text-4xl"></i>
-                    </div>
-                    <h3 class="mt-4 text-lg font-semibold text-gray-500 font-serif">Hukum Adat</h3>
-                </a>
+            {{-- Hukum Adat --}}
+            <a href="#" class="group">
+                <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                    <img src="{{ asset('gambar/regulasi/hukum.svg') }}" alt="Hukum Adat" class="w-12 h-12">
+                </div>
+                <h3 class="mt-4 text-lg font-semibold text-gray-500 font-serif">Hukum Adat</h3>
+            </a>
 
-                {{-- Peraturan Daerah (Placeholder) --}}
-                <a href="#" class="group">
-                    <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full flex items-center justify-center text-gray-600 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i class="bi bi-building-fill-check text-4xl"></i>
-                    </div>
-                    <h3 class="mt-4 text-lg font-semibold text-gray-500 font-serif">Peraturan Daerah</h3>
-                </a>
-
-            </div>
+            {{-- Peraturan Daerah --}}
+            <a href="#" class="group">
+                <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                    <img src="{{ asset('gambar/regulasi/bukupalu.svg') }}" alt="Peraturan Daerah" class="w-12 h-12">
+                </div>
+                <h3 class="mt-4 text-lg font-semibold text-gray-500 font-serif">Peraturan Daerah</h3>
+            </a>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <main class="py-16 sm:py-24">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-left mb-12">
+            <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-900 font-serif">Keputusan Paruman</h2>
-                <img src="{{ asset('gambar/divider.png') }}" alt="Pemisah Hiasan" class="mt-2 h-6">
+                <img src="{{ asset('gambar/divider.png') }}" alt="Pemisah Hiasan" class="mt-2 h-6 mx-auto">
             </div>
 
             <div class="bg-white rounded-lg shadow-lg p-6">
@@ -118,9 +118,5 @@
             </div>
         </div>
     </main>
-
-    {{-- Asumsi Anda memiliki file footer terpisah --}}
-    @include('layouts.footer') 
-
 </body>
 </html>

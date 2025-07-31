@@ -19,7 +19,7 @@ class RegulasiController extends Controller
     public function index()
     {
         $regulasis = Regulasi::latest()->paginate(10);
-        return view('regulasi-list', compact('regulasis'));
+        return view('regulasi.regulasi-list', compact('regulasis'));
     }
 
     /**
@@ -36,7 +36,7 @@ class RegulasiController extends Controller
                                     ->take(4)
                                     ->get();
 
-        return view('regulasi-single', compact('regulasi', 'regulasiLainnya'));
+        return view('regulasi.regulasi-single', compact('regulasi', 'regulasiLainnya'));
     }
 }
  
