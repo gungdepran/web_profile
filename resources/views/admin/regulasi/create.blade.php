@@ -146,63 +146,48 @@
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <h1 class="card-title mb-0">Tambah Regulasi Baru</h1>
-                <h1 class="card-title mb-0">Tambah Regulasi Baru</h1>
             </div>
             <div class="card-body">
                <form action="{{ route('admin.regulasi.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="judul" class="form-label">Judul Regulasi</label>
-                        <label for="judul" class="form-label">Judul Regulasi</label>
                         <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}" required>
                         @error('judul')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="tanggal" class="form-label">Tanggal</label>
                         <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" value="{{ old('tanggal') }}" required>
                         @error('tanggal')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="isi_keputusan" class="form-label">Isi Keputusan</label>
                         <textarea class="form-control @error('isi_keputusan') is-invalid @enderror" id="isi_keputusan" name="isi_keputusan" rows="5" required>{{ old('isi_keputusan') }}</textarea>
                         @error('isi_keputusan')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="thumbnail" class="form-label">Thumbnail (Opsional)</label>
-                        <input type="file" class="form-control @error('thumbnail') is-invalid @enderror" id="thumbnail" name="thumbnail" accept="image/*">
-                        @error('thumbnail')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                        @error('judul')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="tanggal" class="form-label">Tanggal</label>
-                        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal" name="tanggal" value="{{ old('tanggal') }}" required>
-                        @error('tanggal')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="isi_keputusan" class="form-label">Isi Keputusan</label>
-                        <textarea class="form-control @error('isi_keputusan') is-invalid @enderror" id="isi_keputusan" name="isi_keputusan" rows="5" required>{{ old('isi_keputusan') }}</textarea>
-                        @error('isi_keputusan')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                    </div>
+
                     <div class="mb-3">
                         <label for="thumbnail" class="form-label">Thumbnail (Opsional)</label>
                         <input type="file" class="form-control @error('thumbnail') is-invalid @enderror" id="thumbnail" name="thumbnail" accept="image/*">
                         @error('thumbnail')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="file_path" class="form-label">File Dokumen (PDF/Word, Opsional)</label>
                         <input type="file" class="form-control @error('file_path') is-invalid @enderror" id="file_path" name="file_path" accept=".pdf,.doc,.docx">
                         @error('file_path')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                        <label for="file_path" class="form-label">File Dokumen (PDF/Word, Opsional)</label>
-                        <input type="file" class="form-control @error('file_path') is-invalid @enderror" id="file_path" name="file_path" accept=".pdf,.doc,.docx">
-                        @error('file_path')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
-                     <button type="submit" class="btn btn-primary"><i class="bi bi-save-fill"></i> Simpan</button>
+
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-save-fill"></i> Simpan</button>
                     <a href="{{ route('admin.regulasi.index') }}" class="btn btn-secondary"><i class="bi bi-x-circle-fill"></i> Batal</a>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

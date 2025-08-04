@@ -35,8 +35,6 @@
                 </div>
                 <div class="hidden md:flex md:space-x-8 items-center">
                     <a href="{{ route('beranda') }}" class="text-gray-600 hover:text-indigo-600 font-medium">Beranda</a>
-            
-                    <a href="{{ route('regulasi.list') }}" class="text-indigo-600 hover:text-indigo-800 font-semibold">Regulasi</a>
                 </div>
             </div>
         </div>
@@ -92,81 +90,248 @@
     </div>
 </section>
 
-    <main class="py-16 sm:py-24">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-left mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 font-serif">Keputusan Paruman</h2>
-                <img src="{{ asset('gambar/divider.png') }}" alt="Pemisah Hiasan" class="mt-2 h-6">
+    <main class="py-16 sm:py-24 bg-white">
+    <section id="keputusan-paruman" class="py-16 sm:py-24 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-start relative">
+
+            {{-- Kolom Kiri: Judul & Divider --}}
+            <div class="md:w-1/4 text-center md:text-left mb-10 md:mb-0">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 font-serif leading-snug">Keputusan<br>Paruman</h2>
+                <img src="{{ asset('gambar/regulasi/divider.png') }}" alt="Divider" class="mt-2 h-5 mx-auto md:ml-0">
             </div>
 
-            {{-- LAYOUT BARU: GRID KARTU REGULASI --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @forelse($regulasis as $regulasi)
-                <a href="{{ route('regulasi.show', $regulasi->id) }}" class="group block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                    <div class="flex flex-col h-full">
-                        <div class="flex-shrink-0">
-                            <img class="h-56 w-full object-cover" 
-                                 src="{{ $regulasi->thumbnail ? asset('storage/' . $regulasi->thumbnail) : 'https://placehold.co/600x400/e2e8f0/4a5568?text=Regulasi' }}" 
-                                 alt="{{ $regulasi->judul }}">
-                        </div>
-                        <div class="flex-1 p-6 flex flex-col justify-between">
-                            <div>
-                                <p class="text-sm text-gray-500 mb-1">{{ \Carbon\Carbon::parse($regulasi->tanggal)->format('d F Y') }}</p>
-                                <h3 class="text-xl font-semibold text-gray-900 mb-2 font-serif group-hover:text-indigo-600 transition-colors duration-300">
-                                    {{ $regulasi->judul }}
-                                </h3>
+            {{-- Garis Vertikal --}}
+            <div class="relative mx-6 hidden md:block">
+                <img src="{{ asset('gambar/regulasi/garis.png') }}" alt="Garis Vertikal" class="h-full w-px object-contain">
+            </div>
+
+            {{-- Kolom Konten Kanan: Scrollable Grid 3 Item --}}
+            <div class="md:w-3/4 w-full">
+                <div class="overflow-x-auto">
+                    <div class="flex gap-6 w-max" style="min-width: 768px">
+                        @forelse($regulasis as $regulasi)
+                        <a href="{{ route('regulasi.show', $regulasi->id) }}" class="w-[300px] flex-shrink-0 group bg-white rounded-lg shadow-lg hover:shadow-2xl overflow-hidden transition-all duration-300 transform hover:-translate-y-2">
+                            <div class="flex flex-col h-full">
+                                <div class="flex-shrink-0">
+                                    <img class="h-44 w-full object-cover" 
+                                         src="{{ $regulasi->thumbnail ? asset('storage/' . $regulasi->thumbnail) : 'https://placehold.co/600x400/e2e8f0/4a5568?text=Regulasi' }}" 
+                                         alt="{{ $regulasi->judul }}">
+                                </div>
+                                <div class="flex-1 p-4 flex flex-col justify-between">
+                                    <div>
+                                        <p class="text-sm text-gray-500 mb-1">{{ \Carbon\Carbon::parse($regulasi->tanggal)->format('d F Y') }}</p>
+                                        <h3 class="text-lg font-semibold text-gray-900 font-serif group-hover:text-indigo-600 transition-colors duration-300">
+                                            {{ $regulasi->judul }}
+                                        </h3>
+                                    </div>
+                                    <div class="mt-4">
+                                        <span class="inline-flex items-center text-indigo-600 font-semibold">
+                                            Lihat Detail
+                                            <i class="bi bi-arrow-right-short ml-1"></i>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mt-4">
-                                <span class="inline-flex items-center text-indigo-600 font-semibold">
-                                    Lihat Detail
-                                    <i class="bi bi-arrow-right-short ml-1"></i>
-                                </span>
-                            </div>
+                        </a>
+                        @empty
+                        <div class="text-center py-16 w-full bg-white rounded-lg shadow-md">
+                            <p class="text-xl text-gray-600">Belum ada regulasi untuk ditampilkan.</p>
                         </div>
+                        @endforelse
                     </div>
-                </a>
-                @empty
-                <div class="md:col-span-2 lg:col-span-3 text-center py-16 bg-white rounded-lg shadow-md">
-                    <p class="text-xl text-gray-600">Belum ada regulasi untuk ditampilkan.</p>
                 </div>
-                @endforelse
+
+                {{-- Paginasi --}}
+                <div class="mt-12">
+                    {{ $regulasis->links() }}
+                </div>
             </div>
 
-            {{-- Tautan Paginasi --}}
-            <div class="mt-16">
-                {{ $regulasis->links() }}
+        </div>
+    </div>
+</section>
+
+
+        <section class="bg-white py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+
+        {{-- Garis Tengah (alur.png) --}}
+        <img src="{{ asset('gambar/regulasi/alur.png') }}" alt="Garis Alur" class="absolute left-1/2 transform -translate-x-1/2 h-full z-0">
+
+        <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 text-gray-800 text-center">
+
+            {{-- Kolom Kiri --}}
+            <div class="space-y-16">
+                <div class="mt-0">
+                    <h3 class="font-semibold text-lg">Undang-Undang Nomor 15 Tahun 2023</h3>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg">Peraturan Gubernur Bali Nomor 34 Tahun 2019</h3>
+                </div>
+            </div>
+
+            {{-- Kolom Kanan --}}
+            <div class="space-y-16">
+                <div class="mt-0">
+                    <h3 class="font-medium text-lg">UUD 1945 Pasal 18B Ayat (2)</h3>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg">Peraturan Daerah Provinsi Bali Nomor 4 Tahun 2019</h3>
+                </div>
+                <div>
+                    <h3 class="font-medium text-lg">Keputusan Pesamuan Agung / Paruman</h3>
+                </div>
             </div>
         </div>
+
+        {{-- Divider dan Judul --}}
+        <div class="mt-16 text-center">
+            <h2 class="text-xl font-bold">Dasar Pembentukan<br>Majelis Desa Adat</h2>
+            <img src="{{ asset('gambar/regulasi/divider.png') }}" alt="Divider" class="mx-auto mb-0">
+        </div>
+
+    </div>
+</section>
+
+<section class="py-12 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start relative">
+
+        {{-- Kolom Kiri: Isi Paragraf --}}
+        <div class="md:w-2/3 pr-4">
+            <p class="text-gray-800 text-justify mb-6">
+                Hukum Adat di Bali bersumber dari nilai-nilai tradisi, adat istiadat, dan kearifan lokal yang telah dijalankan turun-temurun oleh masyarakat adat Bali. Dalam konteks Desa Adat, hukum adat berlaku secara mandiri dan mengikat krama desa (warga adat).
+            </p>
+            <p class="text-gray-800 mb-2">Ciri-ciri hukum adat Bali:</p>
+            <ul class="list-disc list-inside text-gray-800 space-y-1 pl-4">
+                <li>Bersifat tidak tertulis, namun hidup dalam praktik keseharian masyarakat.</li>
+                <li>Diatur dan ditegakkan oleh Desa Adat melalui Perarem, Awig-Awig, dan Kerta Desa.</li>
+                <li>Bisa menyentuh aspek sanksi sosial, spiritual, hingga denda material.</li>
+            </ul>
+        </div>
+
+        {{-- Garis Vertikal --}}
+        <div class="relative mx-6 my-8 hidden md:block">
+            <img src="{{ asset('gambar/regulasi/garis.png') }}" alt="Garis Vertikal" class="h-full w-px object-contain">
+        </div>
+
+        {{-- Kolom Kanan: Judul --}}
+        <div class="md:w-1/3 text-center md:text-left mt-8 md:mt-0">
+            <h2 class="text-xl font-bold">Hukum Adat</h2>
+            <img src="{{ asset('gambar/regulasi/divider.png') }}" alt="Divider" class="mx-auto mt-2">
+        </div>
+        
+    </div>
+</section>
+<section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start relative">
+
+        {{-- Kolom Kiri: Judul Vertikal --}}
+        <div class="md:w-1/3 text-center md:text-left">
+            <h2 class="text-xl font-semibold">Peraturan Daerah<br>Provinsi Bali</h2>
+            <img src="{{ asset('gambar/regulasi/divider.png') }}" alt="Divider" class="mx-auto mt-2 md:ml-0">
+        </div>
+
+        {{-- Garis Vertikal --}}
+        <div class="relative mx-6 my-8 hidden md:block">
+            <img src="{{ asset('gambar/regulasi/garis.png') }}" alt="Garis Vertikal" class="h-full w-px object-contain">
+        </div>
+
+        {{-- Kolom Kanan: Isi Pokok Perda --}}
+        <div class="md:w-2/3">
+            <p class="text-lg font-medium text-gray-800 mb-2">Perda Provinsi Bali Nomor 4 Tahun 2019 tentang Desa Adat di Bali</p>
+            <p class="text-base font-semibold text-gray-700 mb-4">Isi pokok Peraturan Daerah</p>
+
+            <div class="space-y-3">
+                @foreach([
+                    'Pengakuan dan perlindungan atas keberadaan Desa Adat.',
+                    'Penjelasan struktur Desa Adat mengenai Bendesa Adat, Prajuru, Krama, dan Banjar Adat.',
+                    'Kewenangan Desa Adat, termasuk bidang hukum adat, spiritual, budaya, lingkungan, dan ekonomi.',
+                    'Pembentukan dan peran Majelis Desa Adat Provinsi/Kabupaten/Kota/Kecamatan.',
+                    'Mekanisme pembentukan Awig-Awig dan Pararem.',
+                    'Pengelolaan harta kekayaan dan dana desa adat.'
+                ] as $item)
+                    <div class="bg-yellow-200 rounded-full px-4 py-3 shadow-sm text-sm text-gray-900 font-medium">
+                        {{ $item }}
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+    </div>
+</section>
+
     </main>
 
     {{-- FOOTER LENGKAP --}}
-    <footer class="bg-gray-800 text-gray-300 mt-20">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-lg font-semibold text-white mb-4 font-serif">Majelis Desa Adat</h3>
-                    <p class="text-sm">Ngardi Jagat Kerthi, Krama Bali Manggala.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold text-white mb-4 font-serif">Tautan Cepat</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="{{ route('beranda') }}#berita" class="hover:text-indigo-400">Berita</a></li>
-                        <li><a href="{{ route('beranda') }}#video-pengumuman" class="hover:text-indigo-400">Video</a></li>
-                        <li><a href="{{ route('regulasi.list') }}" class="hover:text-indigo-400">Regulasi</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold text-white mb-4 font-serif">Ikuti Kami</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><span class="sr-only">Facebook</span><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><span class="sr-only">Instagram</span><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.465c.636-.247 1.363-.416 2.427.465C9.53 2.013 9.884 2 12.315 2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm5.857-8.397a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z" clip-rule="evenodd" /></svg></a>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-8 border-t border-gray-700 pt-8 text-center">
-                <p class="text-sm">&copy; {{ date('Y') }} Majelis Desa Adat Provinsi Bali. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <footer class="bg-[#9C5A00] text-gray-100">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div>
+        <h3 class="text-xl font-bold font-serif mb-4">Tentang</h3>
+        <p class="text-sm leading-relaxed">
+          Ini merupakan website resmi Majelis Desa Adat Provinsi Bali
+        </p>
+        <p class="text-sm mt-4 font-bold">Alamat</p>
+        <p class="text-sm leading-relaxed">
+          Jl. Cok Agung Tresna No.67, Sumerta Kelod,<br>
+          Kec. Denpasar Tim., Kota Denpasar, Bali 80234
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-bold font-serif mb-4">Informasi</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-white">Berita</a></li>
+          <li><a href="#" class="hover:text-white">Video</a></li>
+          <li><a href="#" class="hover:text-white">Lokasi</a></li>
+          <li><a href="#" class="hover:text-white">Kontak</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-bold font-serif mb-4">Kontak Kami</h3>
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-start">
+            <img src="{{ asset('gambar/pin.png') }}" alt="Alamat" class="w-6 h-6 mr-2 mt-1">
+            <span>Jl. Cok Agung Tresna No.67, Sumerta Kelod, Kec. Denpasar Tim., Kota Denpasar, Bali</span>
+          </li>
+          <li class="flex items-center">
+            <img src="{{ asset('gambar/phone.png') }}" alt="Telepon" class="w-7 h-7 mr-2">
+            <span>0813-3871-9803</span>
+          </li>
+          <li class="flex items-center">
+            <img src="{{ asset('gambar/email.png') }}" alt="Email" class="w-6 h-5 mr-2">
+            <span>mdabaliofficial@gmail.com</span>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-bold font-serif mb-4">Media Sosial</h3>
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-center">
+            <img src="{{ asset('gambar/Facebook.png') }}" alt="Facebook" class="w-6 h-6 mr-2">
+            <span>Mda Provinsi Bali</span>
+          </li>
+          <li class="flex items-center">
+            <img src="{{ asset('gambar/instagram.png') }}" alt="Instagram" class="w-6 h-6 mr-2">
+            <span>@mdabali_official</span>
+          </li>
+          <li class="flex items-center">
+            <img src="{{ asset('gambar/tiktok.png') }}" alt="TikTok" class="w-6 h-6 mr-2">
+            <span>mdaprovbali_official</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-[#3F3659] py-4">
+    <p class="text-center text-sm text-white">
+      Majelis Desa Adat Provinsi Bali
+    </p>
+  </div>
+</footer>
 </body>
 </html>

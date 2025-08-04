@@ -148,8 +148,8 @@
 <div class="content">
     <div class="container-fluid">
         <div class="card shadow-sm border-0">
-            <div class="card-header bg-primary text-white">
-                <h1 class="h5 mb-0">Manajemen Blog</h1>
+            <div class="card-header" style="background-color: #2a5298; color: #fff;">
+                <h1 class="card-title mb-0" style="font-size: 1.5rem;">Manajemen Blog</h1>
             </div>
             <div class="card-body">
                 <a href="{{ route('admin.blogs.create') }}" class="btn btn-success rounded-pill mb-4 px-3">

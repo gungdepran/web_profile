@@ -81,11 +81,11 @@
 
 
     <main class="py-16 sm:py-24">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 font-serif">Keputusan Paruman</h2>
-                <img src="{{ asset('gambar/divider.png') }}" alt="Pemisah Hiasan" class="mt-2 h-6 mx-auto">
-            </div>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 font-serif text-center">Keputusan Paruman</h2>
+            <img src="{{ asset('gambar/divider.png') }}" alt="Pemisah Hiasan" class="mt-2 h-6">
+        </div>
 
             <div class="bg-white rounded-lg shadow-lg p-6">
                 <div class="space-y-6">
