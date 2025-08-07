@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Majelis Desa Adat Bali</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -80,7 +81,7 @@
     <main class="py-16 sm:py-24 space-y-20">
         
         {{-- BAGIAN BERITA TERBARU --}}
-        <section id="berita" class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="berita" class="container mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
     <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-gray-900 tracking-tight sm:text-4xl font-serif">Berita Terbaru</h2>
         <img src="{{ asset('gambar/divider.png') }}" alt="Pemisah Hiasan" class="mx-auto mt-1 h-8">
@@ -128,7 +129,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
                     
                     {{-- KOLOM KIRI: VIDEO TERBARU --}}
-                    <div class="lg:col-span-2">
+                    <div class="lg:col-span-2" data-aos="fade-right">
                         <div class="mb-8 flex flex-col items-center text-center">
                             <h2 class="text-3xl font-bold text-gray-900 tracking-tight sm:text-4xl font-serif">Video Terbaru</h2>
                             <img src="{{ asset('gambar/divider.png') }}" alt="Pemisah Hiasan" class="mt-2 h-6 mx-auto">
@@ -159,7 +160,7 @@
                     </div>
 
                     {{-- KOLOM KANAN: PENGUMUMAN --}}
-                    <div>
+                    <div data-aos="fade-left">
                         <div class="mb-8 flex flex-col items-center text-center">
                             <h2 class="text-3xl font-bold text-gray-900 tracking-tight sm:text-4xl font-serif">Pengumuman</h2>
                             <img src="{{ asset('gambar/divider.png') }}" alt="Pemisah Hiasan" class="mt-2 h-6">
@@ -195,13 +196,13 @@
                                 </div>
                             @endif
                         </div>
-                    </div>
+                    </data-aos=>
                 </div>
             </section>
 
 
 
-        <section id="lokasi" class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 overflow-x-hidden">
+        <section id="lokasi" class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 overflow-x-hidden" data-aos="fade-up">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-900 tracking-tight sm:text-4xl font-serif">Lokasi Majelis Desa Adat</h2>
                 <img src="{{ asset('gambar/divider.png') }}" alt="Pemisah Hiasan" class="mx-auto mt-1 h-8">
@@ -317,6 +318,15 @@
     </p>
   </div>
 </footer>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000, // durasi animasi
+    once: true      // animasi hanya sekali saat scroll
+  });
+</script>
+
 </body>
 </html>
         
